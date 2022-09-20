@@ -13,17 +13,43 @@
 template <typename T>
 std::set<T> setIntersection(std::set<T>& s1, std::set<T>& s2)
 {
+  std::set<T> intersection; // will contain the intersection of s1 ans s2
 
 
+  for(typename std::set<T>::iterator it = s1.begin();it != s1.end(); ++it){
+  
+    if (s2.find(*it) != s2.end()){ // if the element from s1 is also in s2
+      
+      intersection.insert(*it); // add it
 
+    }
 
+  }
+  
+  return intersection;
 
 }
 template <typename T>
 std::set<T> setUnion(std::set<T>& s1, std::set<T>& s2)
 {
+  std::set<T> combo; // will contain union of  both sets. All of s1 and all unique s2
 
+  for(typename std::set<T>::iterator itS1 = s1.begin(); itS1 != s1.end(); ++itS1) {
+		
+    combo.insert(*itS1); // add all of s1
+	}
 
+  // add unique elements of s2
+
+  for(typename std::set<T>::iterator itS2 = s2.begin(); itS2 != s2.end(); ++itS2) {
+		
+    if(combo.find(*itS2) == combo.end()){ // if the element from s2 is not in  s1(union) 
+		  
+      combo.insert(*itS2); // add it
+    }
+	}
+
+	return combo;
 
 
 
