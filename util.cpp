@@ -7,6 +7,15 @@
 using namespace std;
 std::string convToLower(std::string src)
 {
+    stdWe #include <iostream>
+#include <sstream>
+#include <cctype>
+#include <algorithm>
+#include "util.h"
+
+using namespace std;
+std::string convToLower(std::string src)
+{
     std::transform(src.begin(), src.end(), src.begin(), ::tolower);
     return src;
 }
@@ -15,7 +24,7 @@ std::string convToLower(std::string src)
     to a set of words based on the criteria given in the assignment **/
 std::set<std::string> parseStringToWords(string rawWords)
 {
-    set<string> keyWords;
+    std::set<string> keyWords;
     string input = convToLower(rawWords);
     input = ltrim(input);
     string singleWord = "";
