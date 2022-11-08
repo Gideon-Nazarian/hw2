@@ -1,3 +1,6 @@
 .clang-format
 .clang-tidy
 database.txt
+hw2_tests.tar.gz
+database2.txt
+hw2_tests/
