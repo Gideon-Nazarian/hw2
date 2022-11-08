@@ -42,10 +42,10 @@ std::set<T> setUnion(std::set<T>& s1, std::set<T>& s2)
  
  for(typename std::set<T>::iterator itS2 = s2.begin(); itS2 != s2.end(); ++itS2) {
   
-   if(combo.find(*itS2) == combo.end()){ // if the element from s2 is not in  s1(union)**
+    //if(combo.find(*itS2) == combo.end()){ // if the element from s2 is not in  s1(union)**
     
      combo.insert(*itS2); // add it
-   }
+  // }
  }
  
  return combo;

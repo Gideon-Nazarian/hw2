@@ -3,6 +3,7 @@
 #include <cctype>
 #include <algorithm>
 #include "util.h"
+#include <vector>
  
 using namespace std;
 std::string convToLower(std::string src)
@@ -14,7 +15,8 @@ std::string convToLower(std::string src)
 /** Complete the code to convert a string containing a rawWord
    to a set of words based on the criteria given in the assignment **/
 std::set<std::string> parseStringToWords(string rawWords)
-{
+{ 
+   
    std::set<string> keyWords;
    string input = convToLower(rawWords);
    input = ltrim(input);
@@ -55,6 +57,7 @@ std::set<std::string> parseStringToWords(string rawWords)
    return keyWords;
   
 }
+
  
 /**************************************************
 * COMPLETED - You may use the following functions
