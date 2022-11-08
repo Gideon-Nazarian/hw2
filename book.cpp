@@ -35,7 +35,7 @@ std::string Book::displayString() const
  for(int j = 0; j <= i ; j++){
    realPrice += tempPrice[j];
  }
-  std::string temp =  name_ + "\n"+ "Authour: " + Author + " ISBN: " + ISBN + "\n" + realPrice + " " +
+  std::string temp =  name_ + "\n"+ "Author: " + Author + " ISBN: " + ISBN + "\n" + realPrice + " " +
  std::to_string(qty_) + " left \n";
  
  return temp;

@@ -5,13 +5,14 @@
 #include <set>
 #include <vector>
 #include <algorithm>
+#include <cmath>
 #include "product.h"
 #include "user.h"
 #include "util.h"
  
- 
 class Movie : public Product {
 public:
+    //constructor
     Movie(const std::string category, const std::string name, double price, int qty, std::string genre, std::string rating);
    //methods
  

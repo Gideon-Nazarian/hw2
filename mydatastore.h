@@ -45,7 +45,6 @@ private:
    std::map<std::string, std::set<Product*>> pKeys;
      
  
- 
 };
  
 #endif

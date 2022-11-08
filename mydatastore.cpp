@@ -14,6 +14,14 @@ MyDataStore::~MyDataStore() {
    for(Prod_it = products.begin(); Prod_it != products.end(); ++Prod_it) {
      delete *Prod_it;
    }
+   
+   // delete users
+   std::vector<User*>::iterator User_it; // user itterator
+
+		for (User_it = users.begin(); User_it != users.end(); ++User_it) {
+			delete *User_it; 
+		}
+
 }
  
 bool MyDataStore::eUser(std::string username) {
@@ -95,27 +103,20 @@ std::vector<Product*> MyDataStore :: search(std::vector<std::string>& terms, int
    {
      return found;
    }
-  
-   if(pKeys.find(terms[0])!=pKeys.end()) // if first term is found in vector of pKeys
+
+    int tempSol = 0;
+    for (int i = 0; i < (int)terms.size();i++){
+      if(pKeys.find(terms[i])!=pKeys.end()){
+        tempSol = i;
+        i += terms.size();
+      }
+    }
+   if(pKeys.find(terms[tempSol])!=pKeys.end()) // if first(found) term is found in vector of pKeys
    {
-     std::set<Product*> productOfKey = pKeys.find(terms[0])->second; //products that correspond to key
+     std::set<Product*> productOfKey = pKeys.find(terms[tempSol])->second; //products that correspond to key
  
      std::set<Product*> productOfKey2; // temp
- 
-     if(type == 1) // or search
-     {
-       std::vector<std::string>::iterator orIt;
-       for(orIt = terms.begin(); orIt!=terms.end(); ++orIt)
-       {
-         std::map<std::string, std::set<Product*> >::iterator key1 = pKeys.find((*orIt));
-         if (key1 == pKeys.end()){
-           continue;
-         }
-         productOfKey2 = key1->second;
-         productOfKey = setUnion(productOfKey, productOfKey2);
-       }
- 
-     }
+
      if(type == 0) // and search
      {
        std::vector<std::string>::iterator andIt;
@@ -131,6 +132,22 @@ std::vector<Product*> MyDataStore :: search(std::vector<std::string>& terms, int
          productOfKey = setIntersection(productOfKey, productOfKey2);
        }
      }
+
+     if(type == 1) // or search
+     {
+       std::vector<std::string>::iterator orIt;
+       for(orIt = terms.begin(); orIt != terms.end(); ++orIt)
+       {
+         std::map<std::string, std::set<Product*> >::iterator key1 = pKeys.find((*orIt));
+         if (key1 == pKeys.end()){
+           continue;
+         }
+         productOfKey2 = key1->second;
+         productOfKey = setUnion(productOfKey, productOfKey2);
+       }
+ 
+     }
+     
      for(std::set<Product*>::iterator it = productOfKey.begin(); it!=productOfKey.end(); ++it) {
        found.push_back(*it);
      }
@@ -160,15 +177,25 @@ void MyDataStore::addCart(std::string uName, Product* p) {
  
    if(!eUser(uName))
    {
-     std::cout << "Invalid username" << std::endl;
+     std::cout << "invalid request" << std::endl;
      return;
     }
+    bool found = false;
+    for(unsigned int i = 0; i < products.size(); i++){
+      if(products[i] == p){
+        found = true;
+      }
+    }
+    if(found == false){
+      std::cout << "invalid request" << std::endl;
+     return;
+    }
+
    if(Ucarts.find(uName) == Ucarts.end()) { // if new cart
      std::vector<Product*> temp;
      temp.push_back(p);
      Ucarts.insert(make_pair(uName, temp));
    }
- 
    else {
      Ucarts.find(uName)->second.push_back(p);
    }
